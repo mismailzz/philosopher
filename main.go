@@ -35,10 +35,11 @@ func (d *DiningTable) Run() {
 	for p := range d.numOfPhilosophers {
 
 		wg.Add(1)
-		go func(p int){
+		go func(p int) {
+			defer wg.Done()
 			d.philosopherStartEating(p)
 		}(p)
-	
+
 	}
 
 	wg.Wait()
