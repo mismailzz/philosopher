@@ -51,13 +51,22 @@ func (d *DiningTable) philosopherStartEating(philosopherID int) {
 	leftFork := philosopherID
 	rightFork := (philosopherID + 1) % d.numOfPhilosophers
 
+	fmt.Printf("P%d wants Left Fork\n", philosopherID)
 	d.pickUpFork(leftFork)
+	fmt.Printf("P%d got Left Fork\n", philosopherID)
+
+	time.Sleep(100 * time.Millisecond) // force everyone to hold left fork first
+
+	fmt.Printf("P%d wants Right Fork\n", philosopherID)
 	d.pickUpFork(rightFork)
+	fmt.Printf("P%d got Right Fork\n", philosopherID)
 
 	d.startEating(philosopherID)
 
 	d.returnFork(leftFork)
+	fmt.Printf("P%d Released Left Fork\n", philosopherID)
 	d.returnFork(rightFork)
+	fmt.Printf("P%d Released Right Fork\n", philosopherID)
 }
 
 func (d *DiningTable) pickUpFork(fork int) {
@@ -75,7 +84,7 @@ func (d *DiningTable) returnFork(fork int) {
 func (d *DiningTable) startEating(philosopherID int) {
 
 	fmt.Printf("Philosopher %d is eating now.\n", philosopherID)
-	time.Sleep(3 * time.Second)
+	time.Sleep(100 * time.Second)
 
 }
 
