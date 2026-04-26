@@ -26,4 +26,7 @@ Fix: Added visibility of deadlock
 ```bash
 ## In Go, the runtime panic tells you which goroutines are blocked, but it usually does not directly tell you which mutex/fork caused it. So its better to have name for the resouces. Currently we are using only sync.Mutex. Secondly its better to add logging before and after lock.
 
+For deadlock debugging, log these two moments:
+before Lock  = waiting/requesting
+after Lock   = acquired/holding
 ```
